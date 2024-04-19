@@ -11,11 +11,18 @@ You need a working **docker** installation and **docker-compose** running on you
 
 A VM or server you want a ssh tunnel to from your domain set up via cloudflared.
 
-You need to have a domain with it's DNS routed through cloudflare.
+1. You need to have a domain with it's DNS routed through cloudflare.
 https://developers.cloudflare.com/dns/zone-setups/full-setup/setup
 
-Follow these steps to configure your Cloudflare tuhnel and Self-Hosted Application
+2. Follow these steps to configure your Cloudflare tuhnel and Self-Hosted Application
 https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/use-cases/ssh/#connect-to-ssh-server-with-cloudflared-access
+
+3. Next you have to route traffic through tunnel via your domain, instructions are here:
+Via public DNS records in Cloudflare
+Or via a public hostname guided by a Cloudflare Load Balancer
+Or from WARP client private traffic
+
+
 
 ## Quick start
 Clone the GIT repository and start guacamole:
