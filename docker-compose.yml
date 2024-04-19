@@ -146,6 +146,7 @@ services:
 
   # cloudflare
   cloudflared:
+    container_name: cloudflare_gaucamole
     image: erisamoe/cloudflared
     restart: unless-stopped
     command: tunnel run
@@ -153,8 +154,10 @@ services:
       - TUNNEL_TOKEN=${TUNNEL_TOKEN}
       - CLOUDFLARETEAM=${CLOUDFLARE_TEAM_NAME}
       - TZ America/Chicago
+    ports:
+    - 8443:443
     links:
-      - guacamole
+    - guacamole
     networks:
      guacnetwork_compose:
 ####################################################################################
