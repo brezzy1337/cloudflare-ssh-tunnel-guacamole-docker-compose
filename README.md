@@ -12,6 +12,8 @@ You need a working **docker** installation and **docker-compose** running on you
 You need to have a domain with it's DNS routed through cloudflare.
 https://developers.cloudflare.com/dns/zone-setups/full-setup/setup
 
+A VM or server you want to tunnel to from your domain set up and ready to go.
+
 ## Quick start
 Clone the GIT repository and start guacamole:
 
