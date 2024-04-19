@@ -153,23 +153,8 @@ services:
       - TUNNEL_TOKEN=${TUNNEL_TOKEN}
       - CLOUDFLARETEAM=${CLOUDFLARE_TEAM_NAME}
       - TZ America/Chicago
-    depends_on:
-      - mycontainer
-
-########### optional ##############
-  # nginx
-  nginx:
-   container_name: nginx_guacamole_compose
-   restart: always
-   image: nginx
-   volumes:
-   - ./nginx/templates:/etc/nginx/templates:ro
-   - ./nginx/ssl/self.cert:/etc/nginx/ssl/self.cert:ro
-   - ./nginx/ssl/self-ssl.key:/etc/nginx/ssl/self-ssl.key:ro
-   ports:
-   - 8443:443
-   links:
-   - guacamole
-   networks:
+    links:
+      - guacamole
+    networks:
      guacnetwork_compose:
 ####################################################################################
