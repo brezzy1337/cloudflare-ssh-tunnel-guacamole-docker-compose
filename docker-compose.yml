@@ -150,10 +150,10 @@ services:
     image: erisamoe/cloudflared
     restart: unless-stopped
     volumes:
-      - ./cloudflared:/etc/cloudflared
+    - ./cloudflared:/etc/cloudflared
     command: tunnel run
     environment:
-      - TUNNEL_TOKEN=${TUNNEL_TOKEN}
+    - TUNNEL_TOKEN=${TUNNEL_TOKEN}
     links:
     - guacamole
     networks:
