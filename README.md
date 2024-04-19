@@ -99,7 +99,7 @@ The following part of docker-compose.yml will create an instance of PostgreSQL u
 ~~~
 
 #### Guacamole
-The following part of docker-compose.yml will create an instance of guacamole by using the docker image `guacamole` from docker hub. It is also highly configurable using environment variables. In this setup it is configured to connect to the previously created postgres instance using a username and password and the database `guacamole_db`. Port 8080 is only exposed locally! We will attach an instance of nginx for public facing of it in the next step.
+The following part of docker-compose.yml will create an instance of guacamole by using the docker image `guacamole` from docker hub. It is also highly configurable using environment variables. In this setup it is configured to connect to the previously created postgres instance using a username and password and the database `guacamole_db`. Port 8080 is only exposed locally! We will attach an instance of Cloudflare so guacmole is accessible through your sub domain that was configured when setting up your cloudflare tunnel's public host.
 
 ~~~python
 ...
