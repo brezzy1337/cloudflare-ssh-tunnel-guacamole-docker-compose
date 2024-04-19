@@ -18,10 +18,15 @@ https://developers.cloudflare.com/dns/zone-setups/full-setup/setup
 https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/use-cases/ssh/#connect-to-ssh-server-with-cloudflared-access
 
 3. Next you have to route traffic through tunnel via your domain, instructions are here:
-Via public DNS records in Cloudflare
-Or via a public hostname guided by a Cloudflare Load Balancer
-Or from WARP client private traffic
 
+- Via public DNS records in Cloudflare
+https://developers.cloudflare.com/cloudflare-one/connections/connect-apps/routing-to-tunnel/dns
+
+- via a public hostname guided by a Cloudflare Load Balancer
+https://developers.cloudflare.com/cloudflare-one/connections/connect-apps/routing-to-tunnel/lb
+
+- from WARP client private traffic
+https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/private-net/
 
 
 ## Quick start
