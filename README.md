@@ -1,5 +1,5 @@
 # Guacamole with docker-compose
-This is a small documentation how to run a fully working **Apache Guacamole (incubating)** instance with docker (docker-compose). The goal of this project is to make it easy to test Guacamole.
+This is a small documentation how to run a fully working **Apache Guacamole (incubating)** instance with docker (docker-compose). The goal of this project is to make it easy to test Guacamole and tunnel with cloudflared.
 
 ## About Guacamole
 Apache Guacamole (incubating) is a clientless remote desktop gateway. It supports standard protocols like VNC, RDP, and SSH. It is called clientless because no plugins or client software are required. Thanks to HTML5, once Guacamole is installed on a server, all you need to access your desktops is a web browser.
@@ -8,6 +8,9 @@ It supports RDP, SSH, Telnet and VNC and is the fastest HTML5 gateway I know. Ch
 
 ## Prerequisites
 You need a working **docker** installation and **docker-compose** running on your machine.
+
+You need to have a domain with it's DNS routed through cloudflare.
+https://developers.cloudflare.com/dns/zone-setups/full-setup/setup
 
 ## Quick start
 Clone the GIT repository and start guacamole:
