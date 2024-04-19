@@ -103,6 +103,7 @@ services:
     volumes:
     - ./drive:/drive:rw
     - ./record:/record:rw
+    
   # postgres
   postgres:
     container_name: postgres_guacamole_compose
@@ -142,6 +143,18 @@ services:
 ## enable next line when using nginx
     - 8080/tcp
     restart: always
+
+  # cloudflare
+  cloudflared:
+    image: erisamoe/cloudflared
+    restart: unless-stopped
+    command: tunnel run
+    environment:
+      - TUNNEL_TOKEN=${TUNNEL_TOKEN}
+      - CLOUDFLARETEAM=${CLOUDFLARE_TEAM_NAME}
+      - TZ America/Chicago
+    depends_on:
+      - mycontainer
 
 ########### optional ##############
   # nginx
