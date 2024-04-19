@@ -156,8 +156,6 @@ services:
       - TUNNEL_TOKEN=${TUNNEL_TOKEN}
       - CLOUDFLARETEAM=${CLOUDFLARE_TEAM_NAME}
       - TZ America/Chicago
-    ports:
-    - 8443:443
     links:
     - guacamole
     networks:
