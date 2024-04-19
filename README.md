@@ -9,10 +9,13 @@ It supports RDP, SSH, Telnet and VNC and is the fastest HTML5 gateway I know. Ch
 ## Prerequisites
 You need a working **docker** installation and **docker-compose** running on your machine.
 
+A VM or server you want a ssh tunnel to from your domain set up via cloudflared.
+
 You need to have a domain with it's DNS routed through cloudflare.
 https://developers.cloudflare.com/dns/zone-setups/full-setup/setup
 
-A VM or server you want to tunnel to from your domain set up and ready to go.
+Follow these steps to configure your Cloudflare tuhnel and Self-Hosted Application
+https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/use-cases/ssh/#connect-to-ssh-server-with-cloudflared-access
 
 ## Quick start
 Clone the GIT repository and start guacamole:
