@@ -137,10 +137,6 @@ Creates a instance of Cloudflared that utilize the Zero Trust dashboard configua
     command: tunnel run
     environment:
       - TUNNEL_TOKEN=${TUNNEL_TOKEN}
-      - CLOUDFLARETEAM=${CLOUDFLARE_TEAM_NAME}
-      - TZ America/Chicago
-    ports:
-    - 8443:443
     links:
       - guacamole
     networks:
@@ -155,9 +151,6 @@ docker run --rm guacamole/guacamole /opt/guacamole/bin/initdb.sh --postgresql > 
 ~~~
 
 It creates the necessary database initialization file for postgres.
-
-`prepare.sh` also creates the self-signed certificate `./nginx/ssl/self.cert` and the private key `./nginx/ssl/self-ssl.key` which are used
-by nginx for https.
 
 ## reset.sh
 To reset everything to the beginning, just run `./reset.sh`.
