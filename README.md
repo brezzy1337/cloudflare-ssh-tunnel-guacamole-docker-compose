@@ -125,27 +125,26 @@ The following part of docker-compose.yml will create an instance of guacamole by
 ...
 ~~~
 
-#### nginx
-The following part of docker-compose.yml will create an instance of nginx that maps the public port 8443 to the internal port 443. The internal port 443 is then mapped to guacamole using the `./nginx/templates/guacamole.conf.template` file. The container will use the previously generated (`prepare.sh`) self-signed certificate in `./nginx/ssl/` with `./nginx/ssl/self-ssl.key` and `./nginx/ssl/self.cert`.
+#### cloubflared
+Creates a instance of Cloudflared  that maps the public port 8443 to the internal port 443. The internal 443 is then mapped to guacamole using the `./cloudflare/templates/guacamole.conf.template` file. The container will use the previously generated (`prepare.sh`) self-signed certificate in `./cloudflare/ssl/` with `./cloudflare/ssl/self-ssl.key` and `./cloudflare/ssl/self.cert`.
 
 ~~~python
-...
-  # nginx
-  nginx:
-   container_name: nginx_guacamole_compose
-   restart: always
-   image: nginx
-   volumes:
-   - ./nginx/templates:/etc/nginx/templates:ro
-   - ./nginx/ssl/self.cert:/etc/nginx/ssl/self.cert:ro
-   - ./nginx/ssl/self-ssl.key:/etc/nginx/ssl/self-ssl.key:ro
-   ports:
-   - 8443:443
-   links:
-   - guacamole
-   networks:
+  # cloudflare
+  cloudflared:
+    container_name: cloudflare_gaucamole
+    image: erisamoe/cloudflared
+    restart: unless-stopped
+    command: tunnel run
+    environment:
+      - TUNNEL_TOKEN=${TUNNEL_TOKEN}
+      - CLOUDFLARETEAM=${CLOUDFLARE_TEAM_NAME}
+      - TZ America/Chicago
+    ports:
+    - 8443:443
+    links:
+      - guacamole
+    networks:
      guacnetwork_compose:
-...
 ~~~
 
 ## prepare.sh
