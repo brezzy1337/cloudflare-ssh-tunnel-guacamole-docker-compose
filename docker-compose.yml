@@ -154,8 +154,6 @@ services:
     command: tunnel run
     environment:
       - TUNNEL_TOKEN=${TUNNEL_TOKEN}
-      - CLOUDFLARETEAM=${CLOUDFLARE_TEAM_NAME}
-      - TZ America/Chicago
     links:
     - guacamole
     networks:
