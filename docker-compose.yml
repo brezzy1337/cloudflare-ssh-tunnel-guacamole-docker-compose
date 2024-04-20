@@ -144,6 +144,22 @@ services:
     - 8080/tcp
     restart: always
 
+    # nginx
+  nginx:
+   container_name: nginx_guacamole_compose
+   restart: always
+   image: nginx
+   volumes:
+   - ./nginx/templates:/etc/nginx/templates:ro
+   - ./nginx/ssl/self.cert:/etc/nginx/ssl/self.cert:ro
+   - ./nginx/ssl/self-ssl.key:/etc/nginx/ssl/self-ssl.key:ro
+   ports:
+   - 8443:443
+   links:
+   - guacamole
+   networks:
+     guacnetwork_compose:
+
   # cloudflare
   cloudflared:
     container_name: cloudflare_gaucamole
@@ -155,7 +171,5 @@ services:
     environment:
     - TUNNEL_TOKEN=${TUNNEL_TOKEN}
     links:
-    - guacamole
-    networks:
-     guacnetwork_compose:
+    - nginx
 ####################################################################################
