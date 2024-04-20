@@ -99,7 +99,7 @@ The following part of docker-compose.yml will create an instance of PostgreSQL u
 ~~~
 
 #### Guacamole
-The following part of docker-compose.yml will create an instance of guacamole by using the docker image `guacamole` from docker hub. It is also highly configurable using environment variables. In this setup it is configured to connect to the previously created postgres instance using a username and password and the database `guacamole_db`. Port 8080 is only exposed locally! We will attach an instance of Cloudflare so guacmole is accessible through your sub domain that was configured when setting up your cloudflare tunnel's public host.
+The following part of docker-compose.yml will create an instance of guacamole by using the docker image `guacamole` from docker hub. It is also highly configurable using environment variables. In this setup it is configured to connect to the previously created postgres instance using a username and password and the database `guacamole_db`. Port 8080 is only exposed locally! 
 
 ~~~python
 ...
@@ -122,6 +122,31 @@ The following part of docker-compose.yml will create an instance of guacamole by
     ports:
     - 8080/tcp
     restart: always
+...
+~~~
+
+#### nginx
+The following part of docker-compose.yml will create an instance of nginx that maps the public port 8443 to the internal port 443. The internal port 443 is then mapped to guacamole using the `./nginx/templates/guacamole.conf.template` file. The container will use the previously generated (`prepare.sh`) self-signed certificate in `./nginx/ssl/` with `./nginx/ssl/self-ssl.key` and `./nginx/ssl/self.cert`. 
+
+We will then attach an instance of Cloudflare to nginx so it is accessible through your sub domain that was configured when setting up your cloudflare tunnel's public host.
+
+~~~python
+...
+  # nginx
+  nginx:
+   container_name: nginx_guacamole_compose
+   restart: always
+   image: nginx
+   volumes:
+   - ./nginx/templates:/etc/nginx/templates:ro
+   - ./nginx/ssl/self.cert:/etc/nginx/ssl/self.cert:ro
+   - ./nginx/ssl/self-ssl.key:/etc/nginx/ssl/self-ssl.key:ro
+   ports:
+   - 8443:443
+   links:
+   - guacamole
+   networks:
+     guacnetwork_compose:
 ...
 ~~~
 
