@@ -95,7 +95,7 @@ networks:
 services:
   # guacd
   guacd:
-    container_name: guacd_compose
+    container_name: guacd
     image: guacamole/guacd
     networks:
       guacnetwork_compose:
@@ -103,10 +103,10 @@ services:
     volumes:
     - ./drive:/drive:rw
     - ./record:/record:rw
-    
+
   # postgres
   postgres:
-    container_name: postgres_guacamole_compose
+    container_name: postgres_guacamole
     environment:
       PGDATA: /var/lib/postgresql/data/guacamole
       POSTGRES_DB: guacamole_db
@@ -122,7 +122,7 @@ services:
 
   # guacamole
   guacamole:
-    container_name: guacamole_compose
+    container_name: guacamole
     depends_on:
     - guacd
     - postgres
@@ -138,27 +138,26 @@ services:
     networks:
       guacnetwork_compose:
     ports:
-## enable next line if not using nginx
-##    - 8080:8080/tcp # Guacamole is on :8080/guacamole, not /.
-## enable next line when using nginx
+    ##    - 8080:8080/tcp # Guacamole is on :8080/guacamole, not /.
+    ## enable next line when using nginx
     - 8080/tcp
+    ## enable next line if not using nginx
     restart: always
-
     # nginx
   nginx:
-   container_name: nginx_guacamole_compose
-   restart: always
-   image: nginx
-   volumes:
-   - ./nginx/templates:/etc/nginx/templates:ro
-   - ./nginx/ssl/self.cert:/etc/nginx/ssl/self.cert:ro
-   - ./nginx/ssl/self-ssl.key:/etc/nginx/ssl/self-ssl.key:ro
-   ports:
-   - 8443:443
-   links:
-   - guacamole
-   networks:
-     guacnetwork_compose:
+    container_name: nginx_guacamole
+    restart: always
+    image: nginx
+    volumes:
+    - ./nginx/templates:/etc/nginx/templates:ro
+    - ./nginx/ssl/self.cert:/etc/nginx/ssl/self.cert:ro
+    - ./nginx/ssl/self-ssl.key:/etc/nginx/ssl/self-ssl.key:ro
+    ports:
+    - 8443:443
+    links:
+    - guacamole
+    networks:
+      guacnetwork_compose:
 
   # cloudflare
   cloudflared:
