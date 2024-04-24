@@ -143,6 +143,7 @@ services:
     - 8080/tcp
     ## enable next line if not using nginx
     restart: always
+    
     # nginx
   nginx:
     container_name: nginx_guacamole
